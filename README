@@ -1,0 +1,29 @@
+MPTHRIZZLE
+==========
+
+A simple native HTML5 mp3 player.
+
+mpthrizzle exists to allow simple streaming of music from a web server (running wsgi and xsendfile) to any HTML5+mp3 capable device.
+
+Reduce clutter and data duplication. Eat up your bandwidth cap. Enjoy music dead simply.
+
+Coming later: ogg/flac support, users, bells&whistles
+
+
+Requires 
+========
+A way to serve python: mod_wsgi/NgxWSGIModule or FastCGI
+for apache: mod_xsendfile: https://tn123.org/mod_xsendfile/
+for nginx: X-Accel-Redirect (more complicated setup)
+
+
+Apache configuration
+====================
+For any directories that contain music files which _are not_ below the DocumentRoot of the server/vhost, you must add an explicit <Directory> block as such:
+
+<Directory /path/to/musack>
+    XSendFile on
+    XSendFilePath /path/to/musack
+</Directory>
+
+Restart apache and that music will be available
