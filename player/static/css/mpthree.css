@@ -4,16 +4,18 @@
 }
 
 #mpthree {
+    float: left;
     width: 400px;
     margin: 0 10px;
     bottom: 0px;
 }
 
 #player {
+    width: 400px;
+    float: left;
     border: 3px double #000;
     background-color: #ccc;
     margin: 12px auto 0;
-    padding: 8px 10px;
 }
 
 #now_playing {
@@ -33,20 +35,20 @@
     margin: 0 auto;
 }
 
-#controls{
+#controls, #playlist_controls, #filebrowser_controls {
     margin: 0 auto;
     background-color: #888;
     border: 3px double #000;
     padding: 2px 0;
 }
 
-#control_bar {
+#main_control_bar, #playlist_control_bar, #filebrowser_control_bar {
     margin: 4px auto;
     text-align: center;
     font-size: .8em;
 }
 
-.main_control {
+.main_control, .playlist_control, .filebrowser_control {
     color: #eee;
     font-variant: small-caps;
     cursor: pointer;
@@ -78,7 +80,9 @@
     border: 2px double #000;
 }
 
-#playlist_win {
+#playlist_win, #filebrowser {
+    float: left;
+    width: 400px;
     border: 3px double #000;
     margin: 12px auto 0;
     background-color: #ddd;
@@ -86,9 +90,9 @@
     font-family: Verdana, Arial;
 }
 
-#playlist_contents {
+#playlist_contents, #filebrowser_contents {
     height: 600px;
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
 }
 
@@ -96,16 +100,17 @@ ul.playlist {
     list-style-type: none;
 }
 
-.playlist_entry {
-    color: #00f;
+.playlist_entry, .filebrowser_entry {
     cursor: pointer;
     height: 1.1em;
     overflow: hidden;
+    overflow-style: marquee-line;
+    white-space: nowrap;
 }
 
-.playlist_entry a {
+.playlist_entry a, .filebrowser_entry a {
     text-decoration: none;
-    color: #222;
+    color: #000;
 }
 
 li.playlist_entry + li.playlist_entry {
@@ -126,11 +131,17 @@ li.playlist_selected:nth-child(n) {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#777777', endColorstr='#555555'); /* for IE */
     background: -webkit-gradient(linear, left top, left bottom, from(#777), to(#555)); /* for webkit browsers */
     background: -moz-linear-gradient(top,  #777,  #555); /* for firefox 3.6+ */
-
 }
 
-#playlist_controls {
-    border: 3px double #000;
-    height: 25px;
+li.filebrowser_entry + li.filebrowser_entry {
+    border-top: 2px solid #000;
+}
+
+li.filebrowser_entry:nth-child(even) {
+    background-color: #909090;
+}
+
+li.filebrowser_entry:nth-child(odd) {
+    background-color: #adadad;
 }
 

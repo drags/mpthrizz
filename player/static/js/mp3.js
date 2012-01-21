@@ -6,11 +6,13 @@ function setup() {
     var audiop = $("#aplay").get(0);
 
     audiop.volume=.5;
-   // playThis(playfirst);
+    // autoplay
+    // playThis(playfirst);
 
-    //$("#pause").trigger("pause");
-    //$("#play").trigger("play");
+    // keep going man
     $("#aplay").on('ended',playNext);
+
+    // player controls
     $("#pause").click(function() {
         audiop.pause();
     });
@@ -20,7 +22,11 @@ function setup() {
     $("#playnext").click(playNext);
     $("#playprev").click(playPrev);
 
-    $(".playlist_entry a").click(function(e) {
+    $(".playlist_entry a,").click(function(e) {
+        e.preventDefault();
+    });
+
+    $(".filebrowser_entry a,").click(function(e) {
         e.preventDefault();
     });
 
@@ -28,6 +34,30 @@ function setup() {
         var file_link = $(this).children('a');
         playThis(file_link);
     });
+
+    $("li.filebrowser_entry").click(function() {
+        var file_link = $(this).children('a');
+        playThis(file_link);
+    });
+
+    $("ul.filebrowser").load("filebrowser");
+
+    $(document).bind('keypress','z', playPrev);
+
+    $(document).bind('keypress','x', function() {
+        audiop.play();
+    });
+
+    $(document).bind('keypress','c', function() {
+        audiop.pause();
+    });
+
+    $(document).bind('keypress','v', function() {
+        audiop.pause();
+    });
+
+    $(document).bind('keypress','b', playNext);
+
 }
 
 function retCurrentSong() {
@@ -87,7 +117,7 @@ function playPrev() {
 function display_error(msg) {
     $("#errors").html(msg);
     $("#errors").slideDown('fast');
-    $("#errors").delay(4000);
+    $("#errors").delay(2000);
     $("#errors").slideUp('fast');
 }
 

@@ -9,6 +9,9 @@ urlpatterns = patterns('',
     # url(r'^$', 'mpthree.views.home', name='home'),
     # url(r'^mpthree/', include('mpthree.foo.urls')),
     url(r'^$', 'player.views.index', name='index'),
+    url(r'^playlist/(\d+)?', 'player.views.load_playlist'),
+    url(r'^file/(\d+)?', 'player.views.serve_mp3'),
+    url(r'^filebrowser', 'player.views.filebrowser_load'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
