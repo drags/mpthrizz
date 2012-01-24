@@ -64,6 +64,9 @@ def filebrowser_load(request):
     filebrowser_contents = get_all_songs()
     return render_to_response('browser.html', locals())
 
+def filebrowser_load_json(request):
+    filebrowser_contents = get_all_songs()
+    return HttpResponse(serializers.serialize("json", filebrowser_contents))
 
 def load_playlist(request):
     """ load playlist, store in cookie """

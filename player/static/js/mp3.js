@@ -22,11 +22,7 @@ function setup() {
     $("#playnext").click(playNext);
     $("#playprev").click(playPrev);
 
-    $(".playlist_entry a,").click(function(e) {
-        e.preventDefault();
-    });
-
-    $(".filebrowser_entry a,").click(function(e) {
+    $(".playlist_entry a").click(function(e) {
         e.preventDefault();
     });
 
@@ -35,13 +31,11 @@ function setup() {
         playThis(file_link);
     });
 
-    $("li.filebrowser_entry").click(function() {
-        var file_link = $(this).children('a');
-        playThis(file_link);
-    });
 
-    $("ul.filebrowser").load("filebrowser");
+    // load initial filebrowser
+    filterFiles($('input[name=filter_files]').val());
 
+    // hotkeys
     $(document).bind('keypress','z', playPrev);
 
     $(document).bind('keypress','x', function() {
@@ -58,8 +52,34 @@ function setup() {
 
     $(document).bind('keypress','b', playNext);
 
+
+    // file browser filter
+    $('input[name=filter_files]').change(function() {
+        filterFiles($(this).val())
+    });
+
 }
 
+function filterFiles(query) {
+    query = query || "."
+    $.getJSON("filebrowser_json", function(data) {
+        var ites = []
+        $.each(data, function(index, obj) {
+            var track_info = [obj.fields.artist, obj.fields.album, obj.fields.title]
+            var listing = (track_info).join(' - ')
+            var patt = RegExp(query, 'i');
+            if (patt.test(listing)) {
+                ites.push('<li class="filebrowser_entry"><a href="file/' + obj.pk + '">' + listing + '</a></li>');
+            }
+        });
+
+        $('ul.filebrowser_list').html(ites.join(''));
+        
+    });
+}
+
+
+//closey
 function retCurrentSong() {
     return undefined;
 }
