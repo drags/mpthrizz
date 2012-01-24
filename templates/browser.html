@@ -1,0 +1,25 @@
+<script type="text/javascript">
+$(".filebrowser_entry a,").click(function(e) {
+    e.preventDefault();
+});
+
+$("li.filebrowser_entry").click(function() {
+    var entry = '<li class="playlist_entry">' + $(this).html() + '</li>';
+    var something = $("ul.playlist").append(entry);
+
+    $(".playlist_entry a:last").click(function(e) {
+        e.preventDefault();
+    });
+
+    $("li.playlist_entry:last").click(function() {
+        var file_link = $(this).children('a');
+        playThis(file_link);
+    });
+
+});
+
+</script>
+
+{% for i in filebrowser_contents %}
+    <li class="filebrowser_entry"><a href="file/{{ i.id }}">{{ i.listing }}</a></li>
+{% endfor %}

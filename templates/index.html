@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>mpthrizzle</title>
+
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mpthree.css">
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jq.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.hotkeys.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/mp3.js"></script>
+    </head>
+
+    <body>
+
+    <!-- mpthree -->
+    <div id="mpthree">
+        <!-- player -->
+        <div id="player">
+            <div id="now_playing"></div>
+            <div id="html5_progress">
+                <audio id="aplay" src="" controls autoplay ></audio> 
+            </div>
+            <div id="controls">
+                <div id="main_control_bar">
+                    <span class="main_control" id="playprev">Previous</span>
+                    <span class="main_control" id="play">Play</span>
+                    <span class="main_control" id="pause">Pause</span>
+                    <span class="main_control" id="playnext">Next</span>
+                </div>
+            </div>
+            <div id="errors">Mmm</div>
+        </div>
+        <!-- end player -->
+
+        <!-- playlist -->
+        <div id="playlist_win">
+            <!-- <div id="browser_search">
+                <span>Playlist name:</span>
+                <input name="playlist_name" type="text" />
+                <input name="pl_name_update" type="submit" value="Update" />
+            </div> -->
+            <div id="playlist_contents">
+                <ul class="playlist">
+                {% for i in playlist_contents %}
+                    <li class="playlist_entry"><a href="file/{{ i.id }}">{{ i.listing }}</a></li>
+                {% empty %}
+                    <li class="playlist_entry">Add songs from the file browser --&gt;</li>
+                {% endfor %}
+                </ul>
+            </div>
+            <div id="playlist_controls">
+                <div id="playlist_control_bar">
+                    <span class="playlist_control" id="newpl">New</span>
+                    <span class="playlist_control" id="loadpl">Load</span>
+                    <span class="playlist_control" id="plopts">Options</span>
+                </div>
+            </div>
+        </div>
+        <!-- end playlist -->
+    </div>
+    <!-- end mpthree -->
+
+    <!-- file browser -->
+    <div id="filebrowser">
+        <div id="browser_search">
+            <span>Filter:</span>
+            <input name="filter_files" type="text" />
+        </div>
+        <div id="filebrowser_contents">
+            <ul class="filebrowser_list">
+            </ul>
+        </div>
+        <div id="filebrowser_controls">
+            <div id="filebrowser_control_bar">
+                <span class="filebrowser_control" id="addall">Add all</span>
+                <span class="filebrowser_control" id="refreshfiles">Refresh</span>
+            </div>
+        </div>
+    </div>
+    <!-- end file browser -->
+    
+
+    </body>
+</html>
