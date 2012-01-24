@@ -2,10 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-class Directory(models.Model):
-        dir = models.CharField(max_length=1024)
-        relative_to_web = models.CharField(max_length=1024)
-
 class MusicFile(models.Model):
         header = models.CharField(max_length=4)
         title = models.CharField(max_length=60)
@@ -18,7 +14,6 @@ class MusicFile(models.Model):
         tracknumber = models.SmallIntegerField()
         path = models.CharField(max_length=2048)
         date_added = models.DateField(auto_now_add=True)
-        dir = models.ForeignKey('Directory')
 
 class Playlist(models.Model):
         name = models.CharField(max_length=60)

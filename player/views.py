@@ -2,8 +2,9 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
+from django.core import serializers
 
-from player.models import MusicFile, Directory, Playlist, PlaylistEntry
+from player.models import MusicFile, Playlist, PlaylistEntry
 
 def index(request):
     if 'last_playlist' in request.session:
@@ -56,7 +57,6 @@ def get_playlist_contents(playlist):
     files = []
     for m in playlist_contents:
         m.listing = ' - '.join( [m.artist, m.album, m.title] )
-        m.href = m.path.replace(m.dir.dir, m.dir.relative_to_web)
         files.append(m)
     return files
 
@@ -88,7 +88,6 @@ def get_all_songs():
     files = []
     for m in mp3:
         m.listing = ' - '.join( [m.artist, m.album, m.title] )
-        m.href = m.path.replace(m.dir.dir, m.dir.relative_to_web)
         files.append(m)
     return files
 
